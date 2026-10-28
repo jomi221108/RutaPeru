@@ -1,0 +1,17 @@
+# Backend (Java / Maven)
+backend/target/
+*.class
+.idea/
+*.iml
+
+# Frontend (Node / Vite)
+frontend/node_modules/
+frontend/dist/
+
+# Editor / OS
+.vscode/
+.DS_Store
+Thumbs.db
+
+# Empaquetado de entrega (se genera aparte, no versionado)
+rutaperu-proyecto.zip
