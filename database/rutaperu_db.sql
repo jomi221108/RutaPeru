@@ -121,3 +121,82 @@ FLUSH PRIVILEGES;
 SELECT 'Base de datos rutaperu_db creada correctamente.' AS mensaje;
 SELECT * FROM rol;
 SELECT * FROM modulo;
+
+-- =========================================================
+-- Sprint 2: Búsqueda y Reserva de Servicios Turísticos
+-- =========================================================
+
+-- ---------------------------------------------------------
+-- Tabla PROVEEDOR (RF14: verificación por el Administrador)
+-- ---------------------------------------------------------
+CREATE TABLE proveedor (
+    id_proveedor   INT AUTO_INCREMENT PRIMARY KEY,
+    razon_social   VARCHAR(120) NOT NULL,
+    ruc            VARCHAR(11)  NOT NULL,
+    tipo_proveedor VARCHAR(30)  NOT NULL,
+    estado         VARCHAR(20)  NOT NULL DEFAULT 'Pendiente',
+    fecha_registro DATE         NOT NULL,
+    UNIQUE KEY uq_proveedor_ruc (ruc)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------
+-- Tabla SERVICIO (RI02)
+-- ---------------------------------------------------------
+CREATE TABLE servicio (
+    id_servicio       INT AUTO_INCREMENT PRIMARY KEY,
+    id_proveedor      INT NOT NULL,
+    nombre            VARCHAR(120)  NOT NULL,
+    tipo_servicio     VARCHAR(30)   NOT NULL,
+    descripcion       VARCHAR(500)  NULL,
+    ubicacion         VARCHAR(120)  NOT NULL,
+    precio            DECIMAL(10,2) NOT NULL,
+    capacidad         INT           NOT NULL DEFAULT 1,
+    estado            VARCHAR(20)   NOT NULL DEFAULT 'Publicado',
+    fecha_publicacion DATE          NOT NULL,
+    CONSTRAINT fk_servicio_proveedor FOREIGN KEY (id_proveedor) REFERENCES proveedor(id_proveedor)
+) ENGINE=InnoDB;
+
+-- ---------------------------------------------------------
+-- Tabla RESERVA (RI03 / HU.06, alcance parcial sin pago)
+-- ---------------------------------------------------------
+CREATE TABLE reserva (
+    id_reserva            INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario            INT NOT NULL,
+    id_servicio           INT NOT NULL,
+    fecha_inicio          DATE NOT NULL,
+    fecha_fin             DATE NULL,
+    numero_participantes  INT NOT NULL DEFAULT 1,
+    monto_total           DECIMAL(10,2) NOT NULL,
+    estado                VARCHAR(20) NOT NULL DEFAULT 'Pendiente de pago',
+    fecha_creacion        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_reserva_usuario  FOREIGN KEY (id_usuario)  REFERENCES usuario(id_usuario),
+    CONSTRAINT fk_reserva_servicio FOREIGN KEY (id_servicio) REFERENCES servicio(id_servicio)
+) ENGINE=InnoDB;
+
+-- =========================================================
+-- Datos semilla del Sprint 2 (proveedores verificados y
+-- servicios publicados, para poder probar HU.03-HU.06)
+-- =========================================================
+INSERT INTO proveedor (razon_social, ruc, tipo_proveedor, estado, fecha_registro) VALUES
+    ('Hotel Inka Wasi SAC',            '20451236789', 'Hospedaje',  'Verificado', CURDATE()),
+    ('Andes Tours Perú EIRL',          '20478912345', 'Tour',       'Verificado', CURDATE()),
+    ('Transportes Nazca Express SAC',  '20498765432', 'Transporte', 'Verificado', CURDATE());
+
+INSERT INTO servicio (id_proveedor, nombre, tipo_servicio, descripcion, ubicacion, precio, capacidad, estado, fecha_publicacion) VALUES
+    ((SELECT id_proveedor FROM proveedor WHERE ruc='20451236789'), 'Habitación doble vista al valle', 'Hospedaje',
+        'Habitación doble con desayuno incluido, a 10 minutos del centro histórico.', 'Cusco', 180.00, 2, 'Publicado', CURDATE()),
+    ((SELECT id_proveedor FROM proveedor WHERE ruc='20451236789'), 'Suite familiar', 'Hospedaje',
+        'Suite para hasta 4 personas, con sala de estar y vista panorámica.', 'Cusco', 320.00, 4, 'Publicado', CURDATE()),
+    ((SELECT id_proveedor FROM proveedor WHERE ruc='20478912345'), 'Tour guiado a Machu Picchu (día completo)', 'Tour',
+        'Incluye transporte, entrada y guía profesional certificado.', 'Cusco', 250.00, 10, 'Publicado', CURDATE()),
+    ((SELECT id_proveedor FROM proveedor WHERE ruc='20478912345'), 'City tour Arequipa colonial', 'Tour',
+        'Recorrido por el centro histórico y mirador de Yanahuara.', 'Arequipa', 80.00, 15, 'Publicado', CURDATE()),
+    ((SELECT id_proveedor FROM proveedor WHERE ruc='20498765432'), 'Traslado aeropuerto - hotel (Lima)', 'Transporte',
+        'Servicio privado puerta a puerta, unidad con aire acondicionado.', 'Lima', 45.00, 3, 'Publicado', CURDATE()),
+    ((SELECT id_proveedor FROM proveedor WHERE ruc='20498765432'), 'Vuelo sobre las Líneas de Nazca', 'Transporte',
+        'Sobrevuelo de 35 minutos sobre las principales figuras de Nazca.', 'Nazca', 150.00, 4, 'Publicado', CURDATE());
+
+-- Verificación rápida (Sprint 2)
+SELECT 'Tablas de Sprint 2 (proveedor, servicio, reserva) creadas correctamente.' AS mensaje;
+SELECT * FROM proveedor;
+SELECT * FROM servicio;

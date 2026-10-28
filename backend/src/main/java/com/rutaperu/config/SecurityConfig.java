@@ -20,9 +20,10 @@ import com.rutaperu.repository.UsuarioRepository;
 import java.util.List;
 
 /**
- * Configuración mínima de seguridad para el Sprint 1: los endpoints de
- * autenticación quedan abiertos (aún no hay JWT/sesión); el resto de la API
- * quedará protegido en los siguientes sprints.
+ * Configuración de seguridad (HTTP Basic, sin JWT/sesión todavía).
+ * Sprint 1: /api/auth/** queda abierto y /api/admin/** exige rol Administrador.
+ * Sprint 2: /api/servicios/** y /api/reservas/** exigen turista autenticado
+ * (HU.03-HU.06: solo un turista con sesión puede buscar y reservar).
  */
 @Configuration
 @EnableWebSecurity
@@ -56,6 +57,8 @@ public class SecurityConfig {
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers("/api/admin/**").hasRole("Administrador")
                 .requestMatchers("/api/auth/**").permitAll()
+                .requestMatchers("/api/servicios/**").authenticated()
+                .requestMatchers("/api/reservas/**").authenticated()
                 .anyRequest().permitAll()
             )
             .httpBasic(org.springframework.security.config.Customizer.withDefaults());

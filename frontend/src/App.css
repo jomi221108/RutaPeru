@@ -263,3 +263,84 @@
   .admin-modal-backdrop { padding: 12px; }
   .admin-modal__header, .admin-form { padding-left: 18px; padding-right: 18px; }
 }
+
+/* =========================================================
+   Sprint 2 — Búsqueda y Reserva de Servicios Turísticos
+   ========================================================= */
+
+.enlace-primario {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 11px 22px;
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.enlace-primario:hover {
+  background-color: var(--color-primary-dark);
+}
+
+.busqueda-shell { min-height: 100vh; background: var(--color-bg); }
+.busqueda-topbar { min-height: 66px; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 0 5vw; background: #fff; border-bottom: 1px solid var(--color-border); }
+.busqueda-topbar__identidad { display: flex; align-items: center; gap: 16px; color: var(--color-muted); font-size: 13px; font-weight: 500; }
+.busqueda-content { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding: 42px 0 64px; }
+.busqueda-heading { margin-bottom: 28px; }
+.busqueda-eyebrow { color: var(--color-primary); font-size: 11px; font-weight: 800; letter-spacing: 1.1px; text-transform: uppercase; margin: 0 0 8px; }
+.busqueda-heading h1 { font-size: 30px; margin: 0 0 7px; }
+.busqueda-heading p:not(.busqueda-eyebrow) { color: var(--color-muted); font-size: 14px; margin: 0; }
+
+.busqueda-filtros { display: flex; align-items: flex-end; gap: 16px; flex-wrap: wrap; background: #fff; border: 1px solid var(--color-border); border-radius: 10px; padding: 20px; margin-bottom: 24px; }
+.busqueda-filtros .campo { margin-bottom: 0; min-width: 180px; flex: 1; }
+.busqueda-filtros__boton { width: auto; padding: 10px 26px; flex: 0 0 auto; }
+
+.busqueda-vacio { color: var(--color-muted); text-align: center; padding: 40px 0; }
+
+.busqueda-resultados { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; }
+
+.tarjeta-servicio { display: flex; flex-direction: column; gap: 6px; background: #fff; border: 1px solid var(--color-border); border-radius: 12px; padding: 20px; text-decoration: none; color: var(--color-text); box-shadow: 0 6px 18px rgba(15, 23, 42, 0.04); transition: transform 0.12s ease, box-shadow 0.12s ease; }
+.tarjeta-servicio:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08); }
+.tarjeta-servicio h3 { margin: 4px 0 0; font-size: 18px; }
+.tarjeta-servicio__ubicacion { margin: 0; color: var(--color-muted); font-size: 13px; }
+.tarjeta-servicio__proveedor { margin: 0; color: var(--color-muted); font-size: 12px; }
+.tarjeta-servicio__precio { margin: 8px 0 0; font-size: 20px; font-weight: 700; color: var(--color-primary-dark); }
+
+.etiqueta-tipo { display: inline-flex; align-self: flex-start; padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.4px; }
+.etiqueta-tipo--hospedaje { background: #e0ecfb; color: #1d4ed8; }
+.etiqueta-tipo--tour { background: #e4f2e9; color: #226b42; }
+.etiqueta-tipo--transporte { background: #fdeee0; color: #a65331; }
+
+.detalle-estado { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; text-align: center; padding: 24px; color: var(--color-muted); }
+.detalle-shell { min-height: 100vh; background: var(--color-bg); padding: 32px 5vw 64px; }
+.detalle-volver { display: inline-block; margin-bottom: 20px; color: var(--color-muted); font-size: 13px; text-decoration: none; }
+.detalle-volver:hover { color: var(--color-primary); }
+
+.detalle-grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: 28px; align-items: start; max-width: 1040px; margin: 0 auto; }
+.detalle-info { background: #fff; border: 1px solid var(--color-border); border-radius: 12px; padding: 28px; display: flex; flex-direction: column; gap: 10px; }
+.detalle-info h1 { margin: 6px 0 0; font-size: 26px; }
+.detalle-ubicacion { margin: 0; color: var(--color-muted); font-size: 14px; }
+.detalle-descripcion { margin: 10px 0 0; line-height: 1.6; }
+.detalle-datos { display: flex; gap: 28px; margin-top: 14px; padding-top: 16px; border-top: 1px solid var(--color-border); }
+.detalle-datos span { display: block; color: var(--color-muted); font-size: 12px; margin-bottom: 4px; }
+.detalle-datos strong { font-size: 18px; }
+
+.detalle-reserva { background: #fff; border: 1px solid var(--color-border); border-radius: 12px; padding: 28px; }
+.formulario-reserva h2 { margin: 0 0 16px; font-size: 20px; }
+
+.reserva-confirmada h2 { margin: 0 0 10px; font-size: 20px; color: var(--color-success); }
+.reserva-confirmada dl { margin: 14px 0; display: flex; flex-direction: column; gap: 8px; }
+.reserva-confirmada dl > div { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; border-bottom: 1px dashed var(--color-border); padding-bottom: 6px; }
+.reserva-confirmada dt { color: var(--color-muted); }
+.reserva-confirmada dd { margin: 0; font-weight: 600; }
+.reserva-nota { color: var(--color-muted); font-size: 13px; margin: 10px 0 18px; }
+
+@media (max-width: 760px) {
+  .detalle-grid { grid-template-columns: 1fr; }
+  .busqueda-filtros { flex-direction: column; align-items: stretch; }
+  .busqueda-filtros .campo { min-width: 0; }
+  .busqueda-filtros__boton { width: 100%; }
+}

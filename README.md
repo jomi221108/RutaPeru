@@ -29,4 +29,8 @@ ciclo), desarrollado bajo el marco de trabajo SCRUM.
   turistas, con validación de rango de edad.
 - **Panel de administración de usuarios:** gestión (alta, edición, baja) de
   cuentas y roles por parte del Administrador.
-- **Sprint 2 — Búsqueda y Reserva de Servicios Turísticos:** en planificación.
+- **Sprint 2 — Búsqueda y Reserva de Servicios Turísticos:** búsqueda y filtrado
+  de servicios (HU.03), detalle y disponibilidad (HU.04/HU.05) y generación de
+  la reserva en estado "Pendiente de pago" (HU.06, alcance parcial — el pago se
+  implementa en el Sprint 4). Incluye datos semilla de proveedores verificados y
+  servicios publicados para pruebas (PF002, PF003).

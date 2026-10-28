@@ -15,7 +15,7 @@
     <artifactId>rutaperu-backend</artifactId>
     <version>1.0.0</version>
     <name>rutaperu-backend</name>
-    <description>RutaPeru - Backend Sprint 1 (Autenticacion de Usuarios)</description>
+    <description>RutaPeru - Backend Sprint 1 (Autenticacion) y Sprint 2 (Busqueda y Reserva de Servicios)</description>
 
     <properties>
         <java.version>21</java.version>

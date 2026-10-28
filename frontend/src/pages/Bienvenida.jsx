@@ -1,10 +1,9 @@
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 
 /**
- * Página en blanco posterior al login/registro exitoso.
- * Alcance del Sprint 1: únicamente confirma que la autenticación funcionó;
- * el contenido real de esta pantalla se implementará en sprints siguientes.
+ * Página posterior al login/registro. Desde el Sprint 2 es la puerta de
+ * entrada a la búsqueda y reserva de servicios turísticos (HU.03-HU.06).
  */
 export default function Bienvenida() {
   const navigate = useNavigate();
@@ -20,7 +19,9 @@ export default function Bienvenida() {
           ? `Sesión iniciada como "${nombreUsuario}"${rol ? ` (rol: ${rol})` : ""}.`
           : "Has iniciado sesión correctamente."}
       </p>
-      <p>Esta pantalla se completará en los siguientes sprints.</p>
+      <Link className="enlace-primario" to="/buscar">
+        Buscar servicios turísticos
+      </Link>
       <button className="boton-secundario" onClick={() => { cerrarSesion(); navigate("/"); }}>
         Cerrar sesión
       </button>
